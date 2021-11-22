@@ -42,9 +42,10 @@ public class Leitura {
 
                 Sonda novaSonda = new Sonda(xSonda, ySonda, sentido, numeroSonda);
                 //plantar a sonda no planalto
-                boolean plantou = planalto.pousarSonda(novaSonda);
+                boolean pousou = planalto.pousarSonda(novaSonda);
+                if(pousou) System.out.println("Sucesso ao pousar a sonda de número " + numeroSonda);
 
-                if(!plantou){
+                if(!pousou){
                     //se deu erro ao plantar, mudara as coordenadas as coordenadas int para -1 para sinalizar nas saidas a falha
                     novaSonda.setX(-1);
                     novaSonda.setY(-1);
@@ -53,7 +54,7 @@ public class Leitura {
                     System.out.println("Falha ao pousar a sonda de número " + numeroSonda);
                 }
 
-                if(plantou) System.out.println("Sucesso ao pousar a sonda de número " + numeroSonda);
+                
 
             }
             else{
