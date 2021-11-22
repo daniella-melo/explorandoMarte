@@ -60,6 +60,7 @@ public class Leitura {
             else{
                 String[] instrucoes = input.get(i).split(" ");
                 // se comeca com letra (L,R ou M) refere-se a comandos para a ultima sonda inserida
+                System.out.println("Movimentando a sonda de numero " + numeroSonda + " em Marte... " + numeroSonda);
                 planalto.moverSonda(planalto.getSonda(numeroSonda), instrucoes);
             }
         }
