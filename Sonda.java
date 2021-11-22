@@ -12,10 +12,11 @@ public class Sonda{
 
         //A posição é representada por dois inteiros e uma letra separados por espaços, correpondendo à coordenada X-Y e à direção da sonda. Cada sonda será controlada sequencialmente, o que quer dizer que a segunda sonda só irá se movimentar após que a primeira tenha terminado suas instruções.
 
-    public Sonda(int X, int Y, String sentidoAtual){
+    public Sonda(int X, int Y, String sentidoAtual, int numeroSonda){
         this.X = X;
         this.Y = Y;
         this.sentidoAtual = sentidoAtual;
+        this.numeroSonda = numeroSonda;
     }
 
     public void alterarSentido(String instrucao){

@@ -4,23 +4,28 @@ public class Planalto {
     
     private int Xmax;
     private int Ymax;
-    private ArrayList<Sonda> sondasEmSolo = new ArrayList<Sonda>();
+    private ArrayList<Sonda> sondasEmSolo;
 
     public Planalto(int X, int Y){
         this.Xmax = X;
         this.Ymax = Y;
+
+        sondasEmSolo = new ArrayList<Sonda>();
     }
 
-    public boolean plantarSonda(Sonda novaSonda){
+    public boolean pousarSonda(Sonda novaSonda){
+        //se ja existir essa sonda na lista, nao é possivel adicionar outra
+        if(getSonda(novaSonda.getNumeroSonda()) != null) return false;
+
         //verifica se ja existe alguma sonda onde se quer plantar outra
         if(!checarDestino(novaSonda.getX(), novaSonda.getY())) return false;
-    
+        
         //adiciona a nova sonda no Planalto
         adicionarSonda(novaSonda);
         return true;
     }
     
-    public void moverSonda(Sonda sonda, ArrayList<String> instrucoes){
+    public void moverSonda(Sonda sonda, String[] instrucoes){
         int xSonda = sonda.getX();
         int ySonda = sonda.getY();
 
@@ -94,13 +99,12 @@ public class Planalto {
     }
 
     //checa se ja tem uma sonda em solo com o mesmo numero identificador
-    public boolean existeSonda(int numeroSonda){
+    public Sonda getSonda(int numeroSonda){
         for (Sonda sonda : sondasEmSolo) {
-            if (sonda.getNumeroSonda() == numeroSonda) return true;
+            if (sonda.getNumeroSonda() == numeroSonda) return sonda;
         }
-        return false;
+        return null;
     }
-
 
     //METODOS GETTERS:
 
