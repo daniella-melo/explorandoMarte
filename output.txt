@@ -1,0 +1,33 @@
+ Planalto medindo 5x5 pronto para ser explorado
+
+ Sucesso ao pousar a sonda de número 1
+
+ Movimentando a sonda de numero 1 em Marte...
+
+ Sucesso ao pousar a sonda de número 2
+
+ Movimentando a sonda de numero 2 em Marte...
+
+ Falha ao pousar a sonda de número 2 (java.lang.Exception:
+ Ja existe uma sonda em solo com o numero indentificador informado)
+
+ Falha ao decolar a sonda de número 3 (java.lang.Exception:
+ Nao há uma sonda em solo com o identificador informado)
+
+--- SONDAS EM SOLO:  ---
+
+---Sonda numero: 1 ---
+X final: 1
+Y final: 3
+Sentido: N
+
+---Sonda numero: 2 ---
+X final: 4
+Y final: 1
+Sentido: E
+
+---Resultado Resumido---
+
+1 3 N 1
+
+4 1 E 2
