@@ -1,86 +1,73 @@
-import java.util.*;
+public class Sonda {
 
-public class Sonda{
-
-    private int X; //coordenada X
-    private int Y; //coordenada Y
+    private int X; // coordenada X
+    private int Y; // coordenada Y
     private String sentidoAtual;
-    private int numeroSonda; //numero identificador da Sonda
+    private int numeroSonda; // numero identificador da Sonda
 
-
-        //Cada sonda é representada por duas linhas. A primeira indica sua posição inicial e a segunda uma série de instruções indicando para a sonda como ela deverá explorar o planalto.
-
-        //A posição é representada por dois inteiros e uma letra separados por espaços, correpondendo à coordenada X-Y e à direção da sonda. Cada sonda será controlada sequencialmente, o que quer dizer que a segunda sonda só irá se movimentar após que a primeira tenha terminado suas instruções.
-
-    public Sonda(int X, int Y, String sentidoAtual, int numeroSonda){
+    public Sonda(int X, int Y, String sentidoAtual, int numeroSonda) {
         this.X = X;
         this.Y = Y;
         this.sentidoAtual = sentidoAtual;
         this.numeroSonda = numeroSonda;
     }
 
-    public void alterarSentido(String instrucao){
+    public void alterarSentido(String instrucao) {
 
         // L faz a sonda virar 90 graus para a esquerda, sem mover a sonda.
-        if(instrucao.contains("L")){
-            if (sentidoAtual.contains("N")){
-                this.setSentido("W");//norte muda para oeste
-            }
-            else if(sentidoAtual.contains("W")){
-                 this.setSentido("S"); //oeste muda para sul
-            }
-            else if(sentidoAtual.contains("S")){ 
-                this.setSentido("E"); //sul muda para leste
-            }
-            else {
-                setSentido("N"); //leste muda para norte
+        if (instrucao.equals("L")) {
+            if (sentidoAtual.equals("N")) {
+                this.setSentido("W");// norte muda para oeste
+            } else if (sentidoAtual.equals("W")) {
+                this.setSentido("S"); // oeste muda para sul
+            } else if (sentidoAtual.equals("S")) {
+                this.setSentido("E"); // sul muda para leste
+            } else {
+                this.setSentido("N"); // leste muda para norte
             }
         }
-        
+
         // R faz a sonda virar 90 graus para a direita, sem mover a sonda.
-        else if(instrucao.contains("R")){
-            if (sentidoAtual == "N"){
-                this.setSentido("E"); //norte muda para leste
-            } 
-            else if(sentidoAtual == "E") {
-                this.setSentido("S"); //leste muda para sul
-            } 
-            else if(sentidoAtual == "S") {
-                this.setSentido("W"); //sul muda para oeste
-            } 
-            else {
-                this.setSentido("N"); //oeste muda para norte
-            } 
+        else {
+            if (sentidoAtual.equals("N")) {
+                this.setSentido("E"); // norte muda para leste
+            } else if (sentidoAtual.equals("E")) {
+                this.setSentido("S"); // leste muda para sul
+            } else if (sentidoAtual.equals("S")) {
+                this.setSentido("W"); // sul muda para oeste
+            } else {
+                this.setSentido("N"); // oeste muda para norte
+            }
         }
     }
 
-    //MÉTODOS GETTERS:
-    public int getY(){
+    // MÉTODOS GETTERS:
+    public int getY() {
         return this.Y;
     }
 
-    public int getX(){
+    public int getX() {
         return this.X;
     }
 
-    public String getSentidoAtual(){
+    public String getSentidoAtual() {
         return this.sentidoAtual;
     }
 
-    public int getNumeroSonda(){
+    public int getNumeroSonda() {
         return this.numeroSonda;
     }
 
-    //METODOS SETTER publicos
-    public void setX(int novoX){
+    // METODOS SETTER:
+    public void setX(int novoX) {
         this.X = novoX;
     }
 
-    public void setY(int novoY){
+    public void setY(int novoY) {
         this.Y = novoY;
     }
 
-    public void setSentido(String sentido){
+    public void setSentido(String sentido) {
         this.sentidoAtual = sentido;
     }
 }

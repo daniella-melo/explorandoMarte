@@ -1,23 +1,27 @@
-import java.io.*;
-import java.util.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class Leitura {
 
+    private static final int IDENTIFICADOR_INVALIDO = -1;
     private static ArrayList<String> input; // lista referente ao arquivo input.txt original, na integra
     public Planalto planalto;
-
-    public Leitura() throws FileNotFoundException {
+    
+    public Leitura() throws FileNotFoundException{
         input = new ArrayList<String>();
         Scanner sc = new Scanner(new File("input.txt"));
         while (sc.hasNext()) {
-            input.add(sc.next());
+            input.add(sc.nextLine());
         }
     }
-
-    public void explorarMarte()
-    {
+    
+    public void explorarMarte() throws InterruptedException{
         // Primeira entrada sao as coordenadas maximas do planalto
-        String[] partes = input.get(0).split(",");
+        String[] partes = input.get(0).split(" ");
+
         int xMaxPlanalto = Integer.parseInt(partes[0]);
         int yMaxPlanalto = Integer.parseInt(partes[1]);
 
@@ -28,32 +32,28 @@ public class Leitura {
         int xSonda;
         int ySonda;
         String sentido;
-        int numeroSonda = -1;
-
+        int numeroSonda = IDENTIFICADOR_INVALIDO;
+        
         // Segunda entrada eh a posicao inicial da sonda (x,y), seu sentido inicial e seu numero identificador
-        for(int i=1;i<input.size();i++){
-            // se comeca com um numero, refere-se a uma coordenada/sentido de uma nova sonda
-            if(Character.isDigit(input.get(i).charAt(0))){
-                // Primeira entrada sao as coordenadas maximas do planalto
-                String[] coordenadas = input.get(i).split(",");
-                xSonda  = Integer.parseInt(coordenadas[0]);
+        for(int i=1; i<input.size(); i++){
+            if(linhaDeCoordenadas(i)){
+                String[] coordenadas = input.get(i).split(" ");
+                xSonda = Integer.parseInt(coordenadas[0]);
                 ySonda = Integer.parseInt(coordenadas[1]);
                 sentido = coordenadas[2];
                 numeroSonda = Integer.parseInt(coordenadas[3]);
 
                 Sonda novaSonda = new Sonda(xSonda, ySonda, sentido, numeroSonda);
-                //plantar a sonda no planalto
-                boolean pousou = planalto.pousarSonda(novaSonda);
-                if(pousou) System.out.println("\n Sucesso ao pousar a sonda de número " + numeroSonda);
 
-                if(!pousou){
-                    //se deu erro ao plantar, mudara as coordenadas as coordenadas int para -1 para sinalizar nas saidas a falha
-                    novaSonda.setX(-1);
-                    novaSonda.setY(-1);
-
-                    planalto.adicionarSonda(novaSonda);
-                    System.out.println("\n Falha ao pousar a sonda de número " + numeroSonda);
+                try{
+                    planalto.pousarSonda(novaSonda);
+                    System.out.println("\n Sucesso ao pousar a sonda de número " + numeroSonda);
                 }
+                catch(Exception e){
+                    System.out.println("\n Falha ao pousar a sonda de número " + numeroSonda + " (" + e + ")");
+                    i += 2; //pular a proxima linha, referente as instrucoes dessa sonda
+                }
+                
             }
             else{
                 String[] instrucoes = input.get(i).split("");
@@ -65,6 +65,7 @@ public class Leitura {
     }
 
     public void exibirResultado(){
+        System.out.println("\n--- SONDAS EM SOLO:  ---");
         for (Sonda sonda : planalto.getSondasEmSolo()) {
             System.out.println("\n---Sonda numero: " + sonda.getNumeroSonda() + " ---");
             System.out.println("X final: " + sonda.getX());
@@ -78,4 +79,9 @@ public class Leitura {
         }
 
     }
+
+     // se comeca com um numero, refere-se a uma coordenada/sentido de uma nova sonda
+     private boolean linhaDeCoordenadas(int i){
+        return (Character.isDigit(input.get(i).charAt(0)));
+     }
 }
