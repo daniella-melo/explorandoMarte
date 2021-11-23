@@ -62,6 +62,14 @@ public class Planalto {
 
     }
 
+    public void decolarSonda(int numeroSonda) throws Exception{
+        Sonda sonda =  this.getSonda(numeroSonda);
+        if (sonda == null)
+            throw new Exception("\n Nao há uma sonda em solo com o identificador informado");
+
+        removerSonda(sonda);
+    }
+
     private boolean limiteValido(int xDestino, int yDestino) {
         return !(xDestino >= this.Xmax || yDestino >= this.Ymax);
     }
@@ -78,6 +86,10 @@ public class Planalto {
 
     public void adicionarSonda(Sonda novaSonda) {
         this.sondasEmSolo.add(novaSonda);
+    }
+
+    public void removerSonda(Sonda sonda) {
+        this.sondasEmSolo.remove(sonda);
     }
 
     // checa se ja tem uma sonda em solo com o mesmo numero identificador

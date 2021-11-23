@@ -51,9 +51,21 @@ public class Leitura {
                 }
                 catch(Exception e){
                     System.out.println("\n Falha ao pousar a sonda de número " + numeroSonda + " (" + e + ")");
-                    i += 2; //pular a proxima linha, referente as instrucoes dessa sonda
+                    i++; //pular a proxima linha, referente as instrucoes dessa sonda
+                    continue;
                 }
                 
+            }
+            else if(input.get(i).startsWith("D")){
+                String[] decolar = input.get(i).split(" ");
+                numeroSonda = Integer.parseInt(decolar[1]);
+                try{
+                    planalto.decolarSonda(numeroSonda);
+                    System.out.println("\n Sucesso ao decolar a sonda de número " + numeroSonda);
+                }
+                catch(Exception e){
+                    System.out.println("\n Falha ao decolar a sonda de número " + numeroSonda + " (" + e + ")");
+                }
             }
             else{
                 String[] instrucoes = input.get(i).split("");
