@@ -23,18 +23,34 @@ public class Sonda{
 
         // L faz a sonda virar 90 graus para a esquerda, sem mover a sonda.
         if(instrucao.contains("L")){
-            if (sentidoAtual == "N") setSentido("W"); //norte muda para oeste
-            else if(sentidoAtual == "W") setSentido("S"); //oeste muda para sul
-            else if(sentidoAtual == "S") setSentido("E"); //sul muda para leste
-            else setSentido("N"); //leste muda para norte
+            if (sentidoAtual.contains("N")){
+                this.setSentido("W");//norte muda para oeste
+            }
+            else if(sentidoAtual.contains("W")){
+                 this.setSentido("S"); //oeste muda para sul
+            }
+            else if(sentidoAtual.contains("S")){ 
+                this.setSentido("E"); //sul muda para leste
+            }
+            else {
+                setSentido("N"); //leste muda para norte
+            }
         }
         
         // R faz a sonda virar 90 graus para a direita, sem mover a sonda.
         else if(instrucao.contains("R")){
-            if (sentidoAtual == "N") setSentido("E"); //norte muda para leste
-            else if(sentidoAtual == "E") setSentido("S"); //leste muda para sul
-            else if(sentidoAtual == "S") setSentido("W"); //sul muda para oeste
-            else setSentido("N"); //oeste muda para norte
+            if (sentidoAtual == "N"){
+                this.setSentido("E"); //norte muda para leste
+            } 
+            else if(sentidoAtual == "E") {
+                this.setSentido("S"); //leste muda para sul
+            } 
+            else if(sentidoAtual == "S") {
+                this.setSentido("W"); //sul muda para oeste
+            } 
+            else {
+                this.setSentido("N"); //oeste muda para norte
+            } 
         }
     }
 

@@ -5,7 +5,7 @@ public class Main {
         try {
             Leitura script = new Leitura();
             script.explorarMarte();
-
+            script.exibirResultado();
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
