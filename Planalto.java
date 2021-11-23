@@ -68,7 +68,7 @@ public class Planalto {
 
     public boolean checarDestino(int xDestino, int yDestino, int numeroSonda) {
         for (Sonda sonda : sondasEmSolo) {
-            if (((sonda.getX() == xDestino && sonda.getY() == yDestino) || !limiteValido(xDestino, yDestino))) {
+            if ((sonda.getX() == xDestino && sonda.getY() == yDestino) || !limiteValido(xDestino, yDestino)){
                 // ja existe uma sonda na coordenada desejada ou ultrapassou o limite do planalto
                 return false;
             }
