@@ -57,7 +57,7 @@ public class Planalto {
                     }
                 }
             }
-            Thread.currentThread().sleep(0, 1);
+            Thread.currentThread().sleep(0,1);
         }
 
     }
@@ -71,7 +71,7 @@ public class Planalto {
     }
 
     private boolean limiteValido(int xDestino, int yDestino) {
-        return !(xDestino >= this.Xmax || yDestino >= this.Ymax);
+        return !(xDestino >= this.Xmax || yDestino >= this.Ymax || xDestino < 0 || yDestino < 0);
     }
 
     public boolean checarDestino(int xDestino, int yDestino, int numeroSonda) {
