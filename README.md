@@ -13,13 +13,16 @@ Em seguida, a próxima linha propõe-se a trazer as instruções a serem enviada
 - M: faz com que a sonda mova-se para a frente um ponto da malha, mantendo a mesma direção.
 
 ### Classes:
-Main: Classe onde o método main está localizado, responsável por chamar as funcionalidades da classe Leitura.
-    
+Main: Classe onde o método main está localizado, responsável por chamar as funcionalidades da classe Leitura. 
+
 Leitura: Classe responsável por ler o arquivo de entrada (input.txt), passá-lo para uma lista de Strings onde cada uma é uma linha do arquivo. Em seguida, na função `explorarMarte()` é onde os comandos são interpretados, seja de demarcar um planalto, pousar sonda, movê-la pelo solo ou a decolar. Por fim, a função `exibirResultado()` tem a função de imprimir para o usuário o resultado de toda a interação realizada com as sondas no planalto.
 
 Planalto: Classe responsável por guardar as coordenadas limites do planalto e controlar as interações que ocorrem em seu solo, como as principais: `pousarSonda()`, `moverSonda()` e `decolarSonda()`; e as auxiliares como: certificar que a sonda não ultrapasse os limites do planalto por meio da `limiteValido()`, `checarDestino()` para verificar se a movimentação desejada para a sonda pode ser executada ou se há impedimento (outra sonda no lugar ou limite ultrapassado), `adicionarSonda()` ou `removerSonda()` na lista de sondas em solo, `getSonda()` que retorna o objeto da Sonda desejada por meio de seu número identificador, e métodos getters para as coordenadas do planalto e a lista de sondas em solo. 
 
 Sonda: Classe responsável por guardar as informações referentes a uma sonda, como coordenadas X e Y, sentido atual para o qual ela está apontada (N, S, W ou E) e seu número identificador. Além disso, possui a função `alterarSentido()` que gerencia o atributo de sentidoAtual conforme intruções L ou R são recebidas.
+
+Teste: Idealmente, essa teria sido uma classe criada antes de eu finalizar o programa todo, porém após isso eu percebi que ainda tinha um tempinho e poderia adicioná-la. Além disso, a teoria de ter uma classe para testar poderia ser aprimorada para algo mais sofisticado como testes unitários e aplicação de TDD, porém esse conteúdo ainda é muito novo para eu aplicar bem. Dadas essas considerações, ela tem por objetivo ser como se fosse um "gabarito", assim mediante alterações futuras ela poderá ser usada para ter uma métrica se essas mudanças não alteraram nos resultados esperados. Foi por ela, por exemplo, que notei que havia esquecido de checar os limites inferiores no método `limiteValido()` da classe Planalto. Por fim, em sua estrutura ela conta com apenas um método de teste (`testarMoverSonda()`), por enquanto, que refere-se ao método considerado mais importante nesse escopo, o `moverSonda()` da classe Planalto, pois este depende de diversos outros métodos auxiliares para seu bom funcionamento. Nesse sentido, se o teste ocorrer como esperado a mensagem de retorno será "Teste moverSonda() OK" e se falhar será ""Teste moverSonda() FALHOU"".
+Os planos de testes chumbados nessa classe, o que talvez também não seria o ideal, foram pré pensados em um esquema que montei em uma planilha para eu poder ver qual posição queria que pousasse a sonda e quais comandos levariam ela à posição final desejada. Dessa forma, após finalizar o esquema na planilha, passei isso para o código. Caso tenha interesse, essa foi a planilha utilizada: https://docs.google.com/spreadsheets/d/1YjSjnofZ_QYi2dOkPoXI72hPA3m01ZhAuMAb-S9DdTI/edit?usp=sharing
 
 ### Detalhes:
 #### Observação:
