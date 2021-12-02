@@ -3,9 +3,9 @@ Projeto realizado como parte do processo seletivo do Elo7
 Repositório de referência: https://gist.github.com/elo7-developer/1a40c96a5d062b69f02c
 
 ### Contexto: 
-A NASA envia um conjunto de sondas a um planalto em Marte. Na entrada de dados, a primeira linha identifica as dimensões do planalto a ser explorado e só aparece uma vez, as próximas serão referentes às sondas. Nesse sentido, a próxima linha refere-se às coordenadas iniciais dessa sonda, representa por x e y, acompanhada do sentido posicional dela (podendo ser Norte (N), Sul (S), Leste (E) ou Oeste (W)). Nessa linha de entrada foi feita uma mudança em relação à documentação, assim, antes eram 3 caracteres de entrada e agora são 4, onde o último refere-se ao número identificador da sonda.
+A NASA envia um conjunto de sondas a um planalto em Marte. Na entrada de dados, a primeira linha identifica as dimensões do planalto a ser explorado e só aparece uma vez, as próximas serão referentes às sondas. Nesse direcao, a próxima linha refere-se às coordenadas iniciais dessa sonda, representa por x e y, acompanhada do direcao posicional dela (podendo ser Norte (N), Sul (S), Leste (E) ou Oeste (W)). Nessa linha de entrada foi feita uma mudança em relação à documentação, assim, antes eram 3 caracteres de entrada e agora são 4, onde o último refere-se ao número identificador da sonda.
 Exemplo:
-`2 2 E 1` -> X=2, Y=2, sentidoAtual= Leste, numeroSonda=1
+`2 2 E 1` -> X=2, Y=2, direcao= Leste, numeroSonda=1
 
 Em seguida, a próxima linha propõe-se a trazer as instruções a serem enviadas à sonda pousada pela linha anterior, podendo então ser de 3 tipos:
 - L: faz a sonda virar 90 graus para a esquerda, sem mover a sonda.
@@ -19,17 +19,19 @@ Leitura: Classe responsável por ler o arquivo de entrada (input.txt), passá-lo
 
 Planalto: Classe responsável por guardar as coordenadas limites do planalto e controlar as interações que ocorrem em seu solo, como as principais: `pousarSonda()`, `moverSonda()` e `decolarSonda()`; e as auxiliares como: certificar que a sonda não ultrapasse os limites do planalto por meio da `limiteValido()`, `checarDestino()` para verificar se a movimentação desejada para a sonda pode ser executada ou se há impedimento (outra sonda no lugar ou limite ultrapassado), `adicionarSonda()` ou `removerSonda()` na lista de sondas em solo, `getSonda()` que retorna o objeto da Sonda desejada por meio de seu número identificador, e métodos getters para as coordenadas do planalto e a lista de sondas em solo. 
 
-Sonda: Classe responsável por guardar as informações referentes a uma sonda, como coordenadas X e Y, sentido atual para o qual ela está apontada (N, S, W ou E) e seu número identificador. Além disso, possui a função `alterarSentido()` que gerencia o atributo de sentidoAtual conforme intruções L ou R são recebidas.
+Sonda: Classe responsável por guardar as informações referentes a uma sonda, como coordenadas X e Y, direcao atual para o qual ela está apontada (N, S, W ou E) e seu número identificador. Além disso, possui a função `alterarSentido()` que gerencia o atributo de direcao conforme intruções L ou R são recebidas.
 
-Teste: Idealmente, essa teria sido uma classe criada antes de eu finalizar o programa todo, porém após isso eu percebi que ainda tinha um tempinho e poderia adicioná-la. Além disso, a teoria de ter uma classe para testar poderia ser aprimorada para algo mais sofisticado como testes unitários e aplicação de TDD, porém esse conteúdo ainda é muito novo para eu aplicar bem. Dadas essas considerações, ela tem por objetivo ser como se fosse um "gabarito", assim mediante alterações futuras ela poderá ser usada para ter uma métrica se essas mudanças não alteraram nos resultados esperados. Foi por ela, por exemplo, que notei que havia esquecido de checar os limites inferiores no método `limiteValido()` da classe Planalto. Por fim, em sua estrutura ela conta com apenas um método de teste (`testarMoverSonda()`), por enquanto, que refere-se ao método considerado mais importante nesse escopo, o `moverSonda()` da classe Planalto, pois este depende de diversos outros métodos auxiliares para seu bom funcionamento. Nesse sentido, se o teste ocorrer como esperado a mensagem de retorno será "Teste moverSonda() OK" e se falhar será ""Teste moverSonda() FALHOU"".
+Direcao: Enum com as direções possíveis à sonda (podendo ser Norte (N), Sul (S), Leste (E) ou Oeste (W)).
+
+Teste: Idealmente, essa teria sido uma classe criada antes de eu finalizar o programa todo, porém após isso eu percebi que ainda tinha um tempinho e poderia adicioná-la. Além disso, a teoria de ter uma classe para testar poderia ser aprimorada para algo mais sofisticado como testes unitários e aplicação de TDD, porém esse conteúdo ainda é muito novo para eu aplicar bem. Dadas essas considerações, ela tem por objetivo ser como se fosse um "gabarito", assim mediante alterações futuras ela poderá ser usada para ter uma métrica se essas mudanças não alteraram nos resultados esperados. Foi por ela, por exemplo, que notei que havia esquecido de checar os limites inferiores no método `limiteValido()` da classe Planalto. Por fim, em sua estrutura ela conta com apenas um método de teste (`testarMoverSonda()`), por enquanto, que refere-se ao método considerado mais importante nesse escopo, o `moverSonda()` da classe Planalto, pois este depende de diversos outros métodos auxiliares para seu bom funcionamento. Nesse direcao, se o teste ocorrer como esperado a mensagem de retorno será "Teste moverSonda() OK" e se falhar será ""Teste moverSonda() FALHOU"".
 Os planos de testes chumbados nessa classe, o que talvez também não seria o ideal, foram pré pensados em um esquema que montei em uma planilha para eu poder ver qual posição queria que pousasse a sonda e quais comandos levariam ela à posição final desejada. Dessa forma, após finalizar o esquema na planilha, passei isso para o código. Caso tenha interesse, essa foi a planilha utilizada: https://docs.google.com/spreadsheets/d/1YjSjnofZ_QYi2dOkPoXI72hPA3m01ZhAuMAb-S9DdTI/edit?usp=sharing
 
 ### Detalhes:
 #### Observação:
-No método `moverSonda()` da classe Planalto há um comando de sleep ao final de cada interação no for, isso porque sem este comando a lógica dava certo ao debugar, mas ao rodar sem depuração o valor das variáveis apresentou um comportamento esquisito. A suspeita é que aconteceu alguma condição de corrida onde teve a tentativa de recuperar o valor da variável, mas ela já foi mudada no meio-tempo, algo nesse sentido. Por esse motivo, adicionei a função  `Thread.currentThread().sleep(0,1)` que recebe o tempo como parâmetro em milissegundos. Isso resolveu o problema, embora o ideal fosse adotar alguma solução que não precisasse do sleep.
+No método `moverSonda()` da classe Planalto há um comando de sleep ao final de cada interação no for, isso porque sem este comando a lógica dava certo ao debugar, mas ao rodar sem depuração o valor das variáveis apresentou um comportamento esquisito. A suspeita é que aconteceu alguma condição de corrida onde teve a tentativa de recuperar o valor da variável, mas ela já foi mudada no meio-tempo, algo nesse direcao. Por esse motivo, adicionei a função  `Thread.currentThread().sleep(0,1)` que recebe o tempo como parâmetro em milissegundos. Isso resolveu o problema, embora o ideal fosse adotar alguma solução que não precisasse do sleep.
   
 #### Mudanças:
-1. Número identificador da sonda: esse número precisa ser inserido juntamente com as coordenadas de pouso da sonda, após o sentido dela. A motivação para sua implementação foi para facilitar a recuperação do objeto Sonda desejado, bem como, pensando em uma melhoria futura, caso haja a necessidade de se enviar comandos para sondas já em solos em outro momento que não o logo após o pouso, por meio do identificador ficará mais fácil localizar essa sonda e realizar sua movimentação.
+1. Número identificador da sonda: esse número precisa ser inserido juntamente com as coordenadas de pouso da sonda, após o direcao dela. A motivação para sua implementação foi para facilitar a recuperação do objeto Sonda desejado, bem como, pensando em uma melhoria futura, caso haja a necessidade de se enviar comandos para sondas já em solos em outro momento que não o logo após o pouso, por meio do identificador ficará mais fácil localizar essa sonda e realizar sua movimentação.
 
 2. Função de decolar: Essa função tem por objetivo tirar uma sonda do solo do planalto em Marte, para chamá-la basta colocar o D (de decolar/departure) e o número identificador da sonda desejada. O tópico "Entrada" mostra um exemplo de utilização dessa função. Comentarei disso mais adiante, mas é importante destacar que se o comando de decolar for dado após um de coordenadas e esse apontar algum erro, o algoritmo não executará o de decolar pois por padrão ele pula uma linha assumindo que a seguinte às coordenadas refere-se às instruções para a sonda recém pousada.
 
@@ -45,11 +47,11 @@ No método `moverSonda()` da classe Planalto há um comando de sleep ao final de
 #### Exemplo:
 `5 5`        -> dimensões do Planato
 
-`1 2 N 1`     -> coordenadas de pouso da primeira sonda + sentido + numero identificador
+`1 2 N 1`     -> coordenadas de pouso da primeira sonda + direcao + numero identificador
 
 `LMLMLMLMM`   -> instruções para a sonda 1
 
-`3 3 E 2`     -> coordenadas de pouso da segunda sonda + sentido + numero identificador
+`3 3 E 2`     -> coordenadas de pouso da segunda sonda + direcao + numero identificador
 
 `MMRMMRMRRM`  -> instruções para a sonda 2
 

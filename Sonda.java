@@ -2,13 +2,13 @@ public class Sonda {
 
     private int X; // coordenada X
     private int Y; // coordenada Y
-    private String sentidoAtual;
+    private Direcao direcao;
     private int numeroSonda; // numero identificador da Sonda
 
-    public Sonda(int X, int Y, String sentidoAtual, int numeroSonda) {
+    public Sonda(int X, int Y, Direcao direcao, int numeroSonda) {
         this.X = X;
         this.Y = Y;
-        this.sentidoAtual = sentidoAtual;
+        this.direcao = direcao;
         this.numeroSonda = numeroSonda;
     }
 
@@ -16,27 +16,27 @@ public class Sonda {
 
         // L faz a sonda virar 90 graus para a esquerda, sem mover a sonda.
         if (instrucao.equals("L")) {
-            if (sentidoAtual.equals("N")) {
-                this.setSentido("W");// norte muda para oeste
-            } else if (sentidoAtual.equals("W")) {
-                this.setSentido("S"); // oeste muda para sul
-            } else if (sentidoAtual.equals("S")) {
-                this.setSentido("E"); // sul muda para leste
+            if (direcao.equals(Direcao.N)) {
+                this.setDirecao(Direcao.W);// norte muda para oeste
+            } else if (direcao.equals(Direcao.W)) {
+                this.setDirecao(Direcao.S); // oeste muda para sul
+            } else if (direcao.equals(Direcao.S)) {
+                this.setDirecao(Direcao.E); // sul muda para leste
             } else {
-                this.setSentido("N"); // leste muda para norte
+                this.setDirecao(Direcao.N); // leste muda para norte
             }
         }
 
         // R faz a sonda virar 90 graus para a direita, sem mover a sonda.
         else {
-            if (sentidoAtual.equals("N")) {
-                this.setSentido("E"); // norte muda para leste
-            } else if (sentidoAtual.equals("E")) {
-                this.setSentido("S"); // leste muda para sul
-            } else if (sentidoAtual.equals("S")) {
-                this.setSentido("W"); // sul muda para oeste
+            if (direcao.equals(Direcao.N)) {
+                this.setDirecao(Direcao.E); // norte muda para leste
+            } else if (direcao.equals(Direcao.E)) {
+                this.setDirecao(Direcao.S); // leste muda para sul
+            } else if (direcao.equals(Direcao.S)) {
+                this.setDirecao(Direcao.W); // sul muda para oeste
             } else {
-                this.setSentido("N"); // oeste muda para norte
+                this.setDirecao(Direcao.N); // oeste muda para norte
             }
         }
     }
@@ -50,8 +50,8 @@ public class Sonda {
         return this.X;
     }
 
-    public String getSentidoAtual() {
-        return this.sentidoAtual;
+    public Direcao getDirecao() {
+        return this.direcao;
     }
 
     public int getNumeroSonda() {
@@ -67,7 +67,7 @@ public class Sonda {
         this.Y = novoY;
     }
 
-    public void setSentido(String sentido) {
-        this.sentidoAtual = sentido;
+    public void setDirecao(Direcao direcao) {
+        this.direcao = direcao;
     }
 }

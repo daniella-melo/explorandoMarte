@@ -7,8 +7,8 @@ public class Teste {
 
     public void testaMoverSonda() throws InterruptedException {
         planalto = new Planalto(5, 6);
-        Sonda sonda1 = new Sonda(0, 0, "E", 1);
-        Sonda sonda2 = new Sonda(5, 2, "W", 2);
+        Sonda sonda1 = new Sonda(0, 0, Direcao.E, 1);
+        Sonda sonda2 = new Sonda(5, 2, Direcao.W, 2);
 
         String[] instrucoes1 = new String[8];
         instrucoes1[0] = "M";
@@ -50,6 +50,6 @@ public class Teste {
     }
 
     public String formatarResultado(Sonda sonda) {
-        return sonda.getX() + " " + sonda.getY() + " " + sonda.getSentidoAtual() + " " + sonda.getNumeroSonda();
+        return sonda.getX() + " " + sonda.getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda();
     }
 }

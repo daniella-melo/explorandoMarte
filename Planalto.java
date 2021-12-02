@@ -37,17 +37,18 @@ public class Planalto {
                 sonda.alterarSentido(instrucao);
             }
 
-            // M faz com que a sonda mova-se para a frente um ponto da malha, mantendo a mesma direção.
+            // M faz com que a sonda mova-se para a frente um ponto da malha, mantendo a
+            // mesma direção.
             else {
-                if (sonda.getSentidoAtual().equals("N")) {
+                if (sonda.getDirecao().equals(Direcao.N)) {
                     if (checarDestino(xSonda, ySonda + 1, numeroSonda)) {
                         sonda.setY(ySonda + 1); // mover para o NORTE
                     }
-                } else if (sonda.getSentidoAtual().equals("S")) {
+                } else if (sonda.getDirecao().equals(Direcao.S)) {
                     if (checarDestino(xSonda, ySonda - 1, numeroSonda)) {
                         sonda.setY(ySonda - 1); // mover para o SUL
                     }
-                } else if (sonda.getSentidoAtual().equals("E")) {
+                } else if (sonda.getDirecao().equals(Direcao.E)) {
                     if (checarDestino(xSonda + 1, ySonda, numeroSonda)) {
                         sonda.setX(xSonda + 1); // mover para o LESTE
                     }
@@ -57,13 +58,13 @@ public class Planalto {
                     }
                 }
             }
-            Thread.currentThread().sleep(0,1);
+            Thread.currentThread().sleep(0, 1);
         }
 
     }
 
-    public void decolarSonda(int numeroSonda) throws Exception{
-        Sonda sonda =  this.getSonda(numeroSonda);
+    public void decolarSonda(int numeroSonda) throws Exception {
+        Sonda sonda = this.getSonda(numeroSonda);
         if (sonda == null)
             throw new Exception("\n Nao há uma sonda em solo com o identificador informado");
 
@@ -76,8 +77,9 @@ public class Planalto {
 
     public boolean checarDestino(int xDestino, int yDestino, int numeroSonda) {
         for (Sonda sonda : sondasEmSolo) {
-            if ((sonda.getX() == xDestino && sonda.getY() == yDestino) || !limiteValido(xDestino, yDestino)){
-                // ja existe uma sonda na coordenada desejada ou ultrapassou o limite do planalto
+            if ((sonda.getX() == xDestino && sonda.getY() == yDestino) || !limiteValido(xDestino, yDestino)) {
+                // ja existe uma sonda na coordenada desejada ou ultrapassou o limite do
+                // planalto
                 return false;
             }
         }
