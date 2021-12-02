@@ -2,14 +2,11 @@ import java.util.ArrayList;
 
 public class Planalto {
 
-    private int Xmax;
-    private int Ymax;
+    private Posicao posicao;
     private ArrayList<Sonda> sondasEmSolo;
 
     public Planalto(int X, int Y) {
-        this.Xmax = X;
-        this.Ymax = Y;
-
+        posicao = new Posicao(X, Y);
         sondasEmSolo = new ArrayList<Sonda>();
     }
 
@@ -17,7 +14,7 @@ public class Planalto {
         if (this.getSonda(novaSonda.getNumeroSonda()) != null)
             throw new Exception("\n Ja existe uma sonda em solo com o numero indentificador informado");
 
-        if (!checarDestino(novaSonda.getX(), novaSonda.getY(), novaSonda.getNumeroSonda()))
+        if (!checarDestino(novaSonda.getPosicao().getX(), novaSonda.getPosicao().getY(), novaSonda.getNumeroSonda()))
             throw new Exception(
                     "\n Ja existe uma sonda na posicao de pouso desejada ou as coordenadas ultrapassaram os limites do planalto");
 
@@ -29,8 +26,8 @@ public class Planalto {
         int numeroSonda = sonda.getNumeroSonda();
 
         for (String instrucao : instrucoes) {
-            int xSonda = sonda.getX();
-            int ySonda = sonda.getY();
+            int xSonda = sonda.getPosicao().getX();
+            int ySonda = sonda.getPosicao().getY();
 
             if (instrucao.equals("L") || instrucao.equals("R")) {
                 // faz sonda virar 90 graus para a esquerda(L) ou direita(R), sem mover a sonda.
@@ -42,19 +39,19 @@ public class Planalto {
             else {
                 if (sonda.getDirecao().equals(Direcao.N)) {
                     if (checarDestino(xSonda, ySonda + 1, numeroSonda)) {
-                        sonda.setY(ySonda + 1); // mover para o NORTE
+                        sonda.getPosicao().setY(ySonda + 1); // mover para o NORTE
                     }
                 } else if (sonda.getDirecao().equals(Direcao.S)) {
                     if (checarDestino(xSonda, ySonda - 1, numeroSonda)) {
-                        sonda.setY(ySonda - 1); // mover para o SUL
+                        sonda.getPosicao().setY(ySonda - 1); // mover para o SUL
                     }
                 } else if (sonda.getDirecao().equals(Direcao.E)) {
                     if (checarDestino(xSonda + 1, ySonda, numeroSonda)) {
-                        sonda.setX(xSonda + 1); // mover para o LESTE
+                        sonda.getPosicao().setX(xSonda + 1); // mover para o LESTE
                     }
                 } else {
                     if (checarDestino(xSonda - 1, ySonda, numeroSonda)) {
-                        sonda.setX(xSonda - 1); // mover para o OESTE
+                        sonda.getPosicao().setX(xSonda - 1); // mover para o OESTE
                     }
                 }
             }
@@ -72,12 +69,12 @@ public class Planalto {
     }
 
     private boolean limiteValido(int xDestino, int yDestino) {
-        return !(xDestino >= this.Xmax || yDestino >= this.Ymax || xDestino < 0 || yDestino < 0);
+        return !(xDestino >= this.posicao.getX() || yDestino >= this.posicao.getY() || xDestino < 0 || yDestino < 0);
     }
 
     public boolean checarDestino(int xDestino, int yDestino, int numeroSonda) {
         for (Sonda sonda : sondasEmSolo) {
-            if ((sonda.getX() == xDestino && sonda.getY() == yDestino) || !limiteValido(xDestino, yDestino)) {
+            if ((sonda.getPosicao().getX() == xDestino && sonda.getPosicao().getY() == yDestino) || !limiteValido(xDestino, yDestino)) {
                 // ja existe uma sonda na coordenada desejada ou ultrapassou o limite do
                 // planalto
                 return false;
@@ -103,14 +100,8 @@ public class Planalto {
         return null;
     }
 
-    // METODOS GETTERS:
-
-    public int getX() {
-        return this.Xmax;
-    }
-
-    public int getY() {
-        return this.Ymax;
+    public Posicao getPosicao(){
+        return this.posicao;
     }
 
     public ArrayList<Sonda> getSondasEmSolo() {

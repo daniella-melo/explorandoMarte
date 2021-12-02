@@ -6,6 +6,7 @@ public class Main {
               Leitura script = new Leitura();
               script.explorarMarte();
               script.exibirResultado();
+              Teste teste = new Teste();
           } catch (FileNotFoundException e) {
               e.printStackTrace();
           }

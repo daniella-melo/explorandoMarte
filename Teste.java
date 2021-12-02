@@ -1,8 +1,9 @@
 public class Teste {
     private Planalto planalto;
 
-    public Teste() {
-
+    public Teste() throws InterruptedException {
+        System.out.println("\n-----------TESTE------------");
+        testaMoverSonda();
     }
 
     public void testaMoverSonda() throws InterruptedException {
@@ -50,6 +51,6 @@ public class Teste {
     }
 
     public String formatarResultado(Sonda sonda) {
-        return sonda.getX() + " " + sonda.getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda();
+        return sonda.getPosicao().getX() + " " + sonda.getPosicao().getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda();
     }
 }

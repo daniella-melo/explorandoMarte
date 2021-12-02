@@ -1,13 +1,11 @@
 public class Sonda {
 
-    private int X; // coordenada X
-    private int Y; // coordenada Y
+    private Posicao posicao;
     private Direcao direcao;
     private int numeroSonda; // numero identificador da Sonda
 
     public Sonda(int X, int Y, Direcao direcao, int numeroSonda) {
-        this.X = X;
-        this.Y = Y;
+        posicao = new Posicao(X, Y);
         this.direcao = direcao;
         this.numeroSonda = numeroSonda;
     }
@@ -42,12 +40,8 @@ public class Sonda {
     }
 
     // MÉTODOS GETTERS:
-    public int getY() {
-        return this.Y;
-    }
-
-    public int getX() {
-        return this.X;
+    public Posicao getPosicao(){
+        return this.posicao;
     }
 
     public Direcao getDirecao() {
@@ -56,15 +50,6 @@ public class Sonda {
 
     public int getNumeroSonda() {
         return this.numeroSonda;
-    }
-
-    // METODOS SETTER:
-    public void setX(int novoX) {
-        this.X = novoX;
-    }
-
-    public void setY(int novoY) {
-        this.Y = novoY;
     }
 
     public void setDirecao(Direcao direcao) {
