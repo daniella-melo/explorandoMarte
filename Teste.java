@@ -51,6 +51,6 @@ public class Teste {
     }
 
     public String formatarResultado(Sonda sonda) {
-        return sonda.getPosicao().getX() + " " + sonda.getPosicao().getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda();
+        return sonda.getX() + " " + sonda.getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda();
     }
 }

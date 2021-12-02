@@ -41,7 +41,7 @@ public class Leitura {
                 String[] coordenadas = input.get(i).split(" ");
                 xSonda = Integer.parseInt(coordenadas[0]);
                 ySonda = Integer.parseInt(coordenadas[1]);
-                direcao =  Direcao.valueOf(coordenadas[2]);
+                direcao = Direcao.valueOf(coordenadas[2]);
 
                 numeroSonda = Integer.parseInt(coordenadas[3]);
 
@@ -79,15 +79,15 @@ public class Leitura {
         System.out.println("\n--- SONDAS EM SOLO:  ---");
         for (Sonda sonda : planalto.getSondasEmSolo()) {
             System.out.println("\n---Sonda numero: " + sonda.getNumeroSonda() + " ---");
-            System.out.println("X final: " + sonda.getPosicao().getX());
-            System.out.println("Y final: " + sonda.getPosicao().getY());
+            System.out.println("X final: " + sonda.getX());
+            System.out.println("Y final: " + sonda.getY());
             System.out.println("Sentido: " + sonda.getDirecao());
         }
 
         System.out.println("\n---Resultado Resumido---");
         for (Sonda sonda : planalto.getSondasEmSolo()) {
             System.out.println(
-                    "\n" + sonda.getPosicao().getX() + " " + sonda.getPosicao().getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda());
+                    "\n" + sonda.getX() + " " + sonda.getY() + " " + sonda.getDirecao() + " " + sonda.getNumeroSonda());
         }
 
     }

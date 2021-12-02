@@ -55,4 +55,20 @@ public class Sonda {
     public void setDirecao(Direcao direcao) {
         this.direcao = direcao;
     }
+
+    public int getX(){
+        return getPosicao().getX();
+    }
+
+    public int getY(){
+        return getPosicao().getY();
+    }
+
+    public void setX(int X){
+        getPosicao().setX(X);
+    }
+
+    public void setY(int Y){
+        getPosicao().setY(Y);
+    }
 }

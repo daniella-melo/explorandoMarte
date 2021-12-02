@@ -26,8 +26,8 @@ public class Planalto {
         int numeroSonda = sonda.getNumeroSonda();
 
         for (String instrucao : instrucoes) {
-            int xSonda = sonda.getPosicao().getX();
-            int ySonda = sonda.getPosicao().getY();
+            int xSonda = sonda.getX();
+            int ySonda = sonda.getY();
 
             if (instrucao.equals("L") || instrucao.equals("R")) {
                 // faz sonda virar 90 graus para a esquerda(L) ou direita(R), sem mover a sonda.
@@ -39,19 +39,19 @@ public class Planalto {
             else {
                 if (sonda.getDirecao().equals(Direcao.N)) {
                     if (checarDestino(xSonda, ySonda + 1, numeroSonda)) {
-                        sonda.getPosicao().setY(ySonda + 1); // mover para o NORTE
+                        sonda.setY(ySonda + 1); // mover para o NORTE
                     }
                 } else if (sonda.getDirecao().equals(Direcao.S)) {
                     if (checarDestino(xSonda, ySonda - 1, numeroSonda)) {
-                        sonda.getPosicao().setY(ySonda - 1); // mover para o SUL
+                        sonda.setY(ySonda - 1); // mover para o SUL
                     }
                 } else if (sonda.getDirecao().equals(Direcao.E)) {
                     if (checarDestino(xSonda + 1, ySonda, numeroSonda)) {
-                        sonda.getPosicao().setX(xSonda + 1); // mover para o LESTE
+                        sonda.setX(xSonda + 1); // mover para o LESTE
                     }
                 } else {
                     if (checarDestino(xSonda - 1, ySonda, numeroSonda)) {
-                        sonda.getPosicao().setX(xSonda - 1); // mover para o OESTE
+                        sonda.setX(xSonda - 1); // mover para o OESTE
                     }
                 }
             }
@@ -74,7 +74,7 @@ public class Planalto {
 
     public boolean checarDestino(int xDestino, int yDestino, int numeroSonda) {
         for (Sonda sonda : sondasEmSolo) {
-            if ((sonda.getPosicao().getX() == xDestino && sonda.getPosicao().getY() == yDestino) || !limiteValido(xDestino, yDestino)) {
+            if ((sonda.getX() == xDestino && sonda.getY() == yDestino) || !limiteValido(xDestino, yDestino)) {
                 // ja existe uma sonda na coordenada desejada ou ultrapassou o limite do
                 // planalto
                 return false;
@@ -100,7 +100,7 @@ public class Planalto {
         return null;
     }
 
-    public Posicao getPosicao(){
+    public Posicao getPosicao() {
         return this.posicao;
     }
 
@@ -108,4 +108,19 @@ public class Planalto {
         return this.sondasEmSolo;
     }
 
+    public int getX() {
+        return getPosicao().getX();
+    }
+
+    public int getY() {
+        return getPosicao().getY();
+    }
+
+    public void setX(int X){
+        getPosicao().setX(X);
+    }
+
+    public void setY(int Y){
+        getPosicao().setY(Y);
+    }
 }
